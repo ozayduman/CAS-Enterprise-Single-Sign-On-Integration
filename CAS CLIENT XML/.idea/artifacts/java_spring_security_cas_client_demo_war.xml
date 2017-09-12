@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="java-spring-security-cas-client-demo:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="java-spring-security-cas-client-demo.war">
+      <element id="artifact" artifact-name="java-spring-security-cas-client-demo:war exploded" />
+    </root>
+  </artifact>
+</component>
