@@ -53,18 +53,7 @@
     <alias name="serviceThemeResolver" alias="themeResolver" />
 
     <alias name="jsonServiceRegistryDao" alias="serviceRegistryDao" />
-
-   <!-- <bean id="serviceRegistryDao" class="MaliyeServicePatternRegistry">
-        <constructor-arg name="maliyeServicesPattern" ref="mgmRegisteredServices"/>
-    </bean>
-
-    <bean id="mgmRegisteredServices" class="org.jasig.cas.services.RegexRegisteredService">
-        <property name="id" value="1"/>
-        <property name="name" value="Maliye Bakanligi Servisleri"/>
-        <property name="description" value="Maliye Bakanligi Servisleri"/>
-        <property name="serviceId" value=".*"/>
-        <property name="evaluationOrder" value="1"/>
-    </bean> -->
+    
 
     <alias name="defaultTicketRegistry" alias="ticketRegistry" />
     
