@@ -5,4 +5,12 @@ This repository includes 3 projects:
 - CAS CLIENT: is a spring boot cas client application having java based configuration
 - CAS CLIENT XML:  is a spring boot cas client application having xml based configuration
 
-for more information about cas visit the link : https://apereo.github.io/2017/03/28/cas5-gettingstarted-overlay/
+
+MICRO SERVICE A (CAS CLIENT PROJECT)
+- public page : http://localhost:7171/a/service/greeting2
+- restricted page: http://localhost:7171/a/service/greeting
+MICRO SERVICE B (CAS CLIENT B PROJECT)
+- public page: http://localhost:7172/b/report/hi2
+- restricted page: http://localhost:7172/b/report/hi
+
+
