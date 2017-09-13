@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public ServiceProperties serviceProperties() {
         ServiceProperties serviceProperties = new ServiceProperties();
-        serviceProperties.setService("http://localhost:7171/a/login/cas");
+        serviceProperties.setService("http://localhost:7172/b/login/cas");
         return serviceProperties;
     }
 
@@ -107,7 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .addFilterBefore(singleSignOutFilter(), CasAuthenticationFilter.class);
        http
                .authorizeRequests()
-               .antMatchers("/login/**","/service/greeting2")
+               .antMatchers("/login/**","/report/hi2")
                .permitAll()
                .and()
                .formLogin().permitAll().and()
