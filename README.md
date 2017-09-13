@@ -9,6 +9,8 @@ This repository includes 3 projects:
 MICRO SERVICE A (CAS CLIENT PROJECT)
 - public page : http://localhost:7171/a/service/greeting2
 - restricted page: http://localhost:7171/a/service/greeting
+
+
 MICRO SERVICE B (CAS CLIENT B PROJECT)
 - public page: http://localhost:7172/b/report/hi2
 - restricted page: http://localhost:7172/b/report/hi
