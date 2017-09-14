@@ -15,7 +15,7 @@ This repository includes 3 projects:
 * public page: http://localhost:7172/b/report/hi2
 
 
-### HOW TO RUN AND TEST SINGLE SIGN ON ?###
+### HOW TO RUN AND TEST SINGLE SIGN ON ###
 First, deploy CAS SERVER on a Tomcat server. Then, Launch 'CAS CLIENT A' and 'CAS CLIENT B' services.
 Then access restricted page of micro service a (http://localhost:7171/a/service/greeting), it will redirect to 'cas login page' (http://localhost:8080/cas/login?service=http%3A%2F%2Flocalhost%3A7171%2Fa%2Flogin%2Fcas).
 Type 'ozay' for both username and password fields. Cas will authenticate and redirect to the previous page you request.
