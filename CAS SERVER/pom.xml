@@ -44,7 +44,7 @@
 
     </dependencies>
     <build>
-        <finalName>cas</finalName>
+        <finalName>CAS SERVER</finalName>
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>
