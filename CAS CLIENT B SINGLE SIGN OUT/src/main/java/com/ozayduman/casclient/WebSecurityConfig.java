@@ -83,18 +83,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CasAuthenticationFilter casAuthenticationFilter() throws Exception {
         CasAuthenticationFilter casAuthenticationFilter = new CasAuthenticationFilter();
         casAuthenticationFilter.setAuthenticationManager(authenticationManager());
-      //  casAuthenticationFilter.setSessionAuthenticationStrategy(sessionStrategy());
-       /* SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-        savedRequestAwareAuthenticationSuccessHandler.setDefaultTargetUrl("/");
-        casAuthenticationFilter.setAuthenticationSuccessHandler(savedRequestAwareAuthenticationSuccessHandler);*/
         return casAuthenticationFilter;
     }
 
-    @Bean
-    public SessionAuthenticationStrategy sessionStrategy() {
-        SessionAuthenticationStrategy sessionStrategy = new SessionFixationProtectionStrategy();
-        return sessionStrategy;
-    }
 
     public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
         CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
@@ -117,14 +108,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .formLogin().permitAll().and()
                .authorizeRequests().anyRequest().authenticated();
        http.csrf().disable();
-
-       /**
-        * <logout invalidate-session="true" delete-cookies="JSESSIONID" />
-        */
-
-       /*http.logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true)
-               .deleteCookies("JSESSIONID");*/
-
    }
 
     public SingleSignOutFilter singleSignOutFilter() {
@@ -132,18 +115,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         singleSignOutFilter.setCasServerUrlPrefix("cas");
         return singleSignOutFilter;
     }
-/*
-    @Bean
-    public LogoutFilter requestLogoutFilter() {
-        SecurityContextLogoutHandler handler = new SecurityContextLogoutHandler();
-        handler.setClearAuthentication(true);
-        handler.setInvalidateHttpSession(true);
-        LogoutFilter logoutFilter = new LogoutFilter("http://localhost:8080/cas", handler);
-        return logoutFilter;
-    }
-*/
-  /*  @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(casAuthenticationProvider());
-    }*/
 }

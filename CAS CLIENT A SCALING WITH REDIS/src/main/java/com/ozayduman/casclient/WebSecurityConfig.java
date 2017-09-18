@@ -79,18 +79,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CasAuthenticationFilter casAuthenticationFilter() throws Exception {
         CasAuthenticationFilter casAuthenticationFilter = new CasAuthenticationFilter();
         casAuthenticationFilter.setAuthenticationManager(authenticationManager());
-        casAuthenticationFilter.setSessionAuthenticationStrategy(sessionStrategy());
-       /* SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+       /* casAuthenticationFilter.setSessionAuthenticationStrategy(sessionStrategy());
+        SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
         savedRequestAwareAuthenticationSuccessHandler.setDefaultTargetUrl("/");
         casAuthenticationFilter.setAuthenticationSuccessHandler(savedRequestAwareAuthenticationSuccessHandler);*/
         return casAuthenticationFilter;
     }
 
-    @Bean
+   /* @Bean
     public SessionAuthenticationStrategy sessionStrategy() {
         SessionAuthenticationStrategy sessionStrategy = new SessionFixationProtectionStrategy();
         return sessionStrategy;
-    }
+    }*/
 
     public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
         CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
@@ -104,7 +104,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        http
                .exceptionHandling()
                .authenticationEntryPoint(casAuthenticationEntryPoint()).and().addFilter(casAuthenticationFilter())
-               .addFilterBefore(singleSignOutFilter(), CasAuthenticationFilter.class);
+               //.addFilterBefore(singleSignOutFilter(), CasAuthenticationFilter.class);
+               //.addFilterBefore(casLogoutFilter(), LogoutFilter.class) //SLO  ??
+               .addFilterBefore(singleSignOutFilter(), CasAuthenticationFilter.class); //SLO
        http
                .authorizeRequests()
                .antMatchers("/login/**","/service/greeting2")
@@ -112,19 +114,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .and()
                .formLogin().permitAll().and()
                .authorizeRequests().anyRequest().authenticated();
+       http.csrf().disable();
        /**
         * <logout invalidate-session="true" delete-cookies="JSESSIONID" />
         */
-       http.logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true)
-               .deleteCookies("JSESSIONID");
+       /*http.logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true)
+               .deleteCookies("JSESSIONID");*/
    }
+
+   /* @Bean
+    public LogoutFilter casLogoutFilter() {
+        return new LogoutFilter("http://localhost:8080/cas/logout", casLogoutHandler());
+    }
+
+    @Bean
+    public SecurityContextLogoutHandler casLogoutHandler() {
+        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        logoutHandler.setClearAuthentication(true);
+        logoutHandler.setInvalidateHttpSession(true);
+        return logoutHandler;
+    }*/
 
     public SingleSignOutFilter singleSignOutFilter() {
         SingleSignOutFilter singleSignOutFilter = new SingleSignOutFilter();
         singleSignOutFilter.setCasServerUrlPrefix("cas");
         return singleSignOutFilter;
     }
-
+/*
     @Bean
     public LogoutFilter requestLogoutFilter() {
         SecurityContextLogoutHandler handler = new SecurityContextLogoutHandler();
@@ -132,7 +148,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         handler.setInvalidateHttpSession(true);
         LogoutFilter logoutFilter = new LogoutFilter("http://localhost:8080/cas", handler);
         return logoutFilter;
-    }
+    }*/
+
+
 
   /*  @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
