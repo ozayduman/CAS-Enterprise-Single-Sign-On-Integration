@@ -74,6 +74,7 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
