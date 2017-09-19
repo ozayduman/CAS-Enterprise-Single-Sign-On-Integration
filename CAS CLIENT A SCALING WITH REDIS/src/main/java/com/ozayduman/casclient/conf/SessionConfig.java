@@ -1,4 +1,4 @@
-package com.ozayduman.casclient;
+package com.ozayduman.casclient.conf;
 
 import com.ozayduman.casclient.repository.Citizen;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +22,9 @@ public class SessionConfig {
         return new LettuceConnectionFactory();
     }
 
+    /*
+     * For Redis Repository operations
+     */
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();

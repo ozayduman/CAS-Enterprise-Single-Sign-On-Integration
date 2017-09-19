@@ -1,4 +1,4 @@
-package com.ozayduman.casclient;
+package com.ozayduman.casclient.conf;
 
 import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;

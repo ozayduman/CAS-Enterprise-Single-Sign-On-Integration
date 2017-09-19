@@ -1,4 +1,4 @@
-package com.ozayduman.casclient;
+package com.ozayduman.casclient.conf;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
