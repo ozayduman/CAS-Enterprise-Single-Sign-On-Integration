@@ -3,5 +3,6 @@
   "serviceId" : "^http://.*",
   "name" : "HTTP",
   "id" : 1,
+  "logoutType" : "BACK_CHANNEL",
   "description" : "Bu servis tanimi http destekleyen tum uygulamari yetkilendirir."
 }
