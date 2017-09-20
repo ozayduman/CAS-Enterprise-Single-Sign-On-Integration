@@ -39,6 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${server.port}")
     private String serverPort;
 
+    @Value("${cas.host}")
+    private  String casHost;
+
+    @Value("${cas.loginUrl}")
+    private String casLoginUrl;
+
     @Bean
     public ServiceProperties serviceProperties() {
         ServiceProperties serviceProperties = new ServiceProperties();
@@ -75,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public Cas20ServiceTicketValidator cas20ServiceTicketValidator() {
-        return new Cas20ServiceTicketValidator("http://localhost:8080/cas/");
+        return new Cas20ServiceTicketValidator(casHost);
     }
 
     @Bean
@@ -97,7 +103,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
         CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
-        casAuthenticationEntryPoint.setLoginUrl("http://localhost:8080/cas/login");
+        casAuthenticationEntryPoint.setLoginUrl(casLoginUrl);
         casAuthenticationEntryPoint.setServiceProperties(serviceProperties());
         return casAuthenticationEntryPoint;
     }

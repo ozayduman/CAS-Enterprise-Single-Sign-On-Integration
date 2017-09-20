@@ -12,6 +12,9 @@ import java.util.Map;
  * Created by ozayd on 19.09.2017.
  */
 @Repository
+/*
+ * Life cycle is not managed by http session
+ */
 public class CitizenRepositoryImpl implements CitizenRepository {
     private static final String KEY = "Citizen";
 

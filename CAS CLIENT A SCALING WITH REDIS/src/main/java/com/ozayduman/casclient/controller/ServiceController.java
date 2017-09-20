@@ -1,4 +1,4 @@
-package com.ozayduman.casclient;
+package com.ozayduman.casclient.controller;
 
 import com.ozayduman.casclient.repository.Citizen;
 import com.ozayduman.casclient.repository.CitizenRepository;
@@ -36,31 +36,32 @@ public class ServiceController {
 
     @RequestMapping("/put")
     public String sessionPut(HttpSession session) {
-        session.setAttribute(session.getId()+"p","özay");
+        final Citizen citizen = new Citizen("100","Özay DUMAN", Citizen.Gender.MALE,1);
+        session.setAttribute(session.getId(),citizen);
         return "session id : " +session.getId();
     }
 
     @RequestMapping("/get")
-    public String sessionGet(HttpSession session) {
-        return session.getAttribute(session.getId()+"p").toString();
+    public Citizen sessionGet(HttpSession session) {
+        return (Citizen)session.getAttribute(session.getId());
     }
 
     @RequestMapping("/saveCitizen")
     public String saveCitizen(HttpSession session) {
-        final Citizen citizen = new Citizen(session.getId(),"Özay DUMAN", Citizen.Gender.MALE,1);
+        final Citizen citizen = new Citizen("100","Özay DUMAN", Citizen.Gender.MALE,1);
         citizenRepository.saveCitizen(citizen);
         return "citizenSaved";
     }
 
     @RequestMapping("/findCitizen")
     public Citizen findCitizen(HttpSession session) {
-        Citizen citizen = citizenRepository.findCitizen(session.getId());
+        Citizen citizen = citizenRepository.findCitizen("100");
         return citizen;
     }
 
     @RequestMapping("/deleteCitizen")
     public String deleteCitizen(HttpSession session) {
-        citizenRepository.deleteCitizen(session.getId());
+        citizenRepository.deleteCitizen("100");
         return "citizen deleted";
     }
 }

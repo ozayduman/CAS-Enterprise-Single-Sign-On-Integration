@@ -23,7 +23,7 @@ public class SessionConfig {
     }
 
     /*
-     * For Redis Repository operations
+     * For Redis Repository Operations
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
