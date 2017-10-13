@@ -47,15 +47,16 @@ On a successful deployment via the following methods, CAS will be available at:
 
 ## Executable WAR
 
-Run the CAS web application as an executable WAR.
-
+Run the CAS web application as an executable WAR. You can run multiple instance of cas server as follows
+Note that: you should put signing and encryption keys to  etc\cas\config\cas.properties file
 ```bash
-
-you can run multiple instance of cas server as follows:
 java -jar -Dcas.standalone.config="D:\etc\cas\config" cas.war
 java -jar -Dserver.port=7979 -Dcas.standalone.config="D:\etc\cas\config" cas.war
-Note that: you should put signing and encryption keys to  etc\cas\config\cas.properties file
+```
+
 you can configure a loadbanced with non-sticky ip (no hash).  For nginx you can use the following configuration file.
+
+```bash
 worker_processes  1;
 
 events {
@@ -83,7 +84,6 @@ http {
    }
 
 }
-
 ```
 
 ## Spring Boot
