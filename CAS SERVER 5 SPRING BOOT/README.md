@@ -1,7 +1,6 @@
-CAS Overlay Template
-============================
-
-Generic CAS WAR overlay to exercise the latest versions of CAS. This overlay could be freely used as a starting template for local CAS war overlays. The CAS services management overlay is available [here](https://github.com/apereo/cas-services-management-overlay).
+CAS Server Clustering Wiht Redis
+================================
+This is a sample project that demonstrates how to cluster cas server with redis. This could be freely used as a starting template. The CAS services management overlay is available [here](https://github.com/apereo/cas-services-management-overlay).
 
 # Versions
 
@@ -51,7 +50,40 @@ On a successful deployment via the following methods, CAS will be available at:
 Run the CAS web application as an executable WAR.
 
 ```bash
-./build.sh run
+
+you can run multiple instance of cas server as follows:
+java -jar -Dcas.standalone.config="D:\etc\cas\config" cas.war
+java -jar -Dserver.port=7979 -Dcas.standalone.config="D:\etc\cas\config" cas.war
+Note that: you should put signing and encryption keys to  etc\cas\config\cas.properties file
+you can configure a loadbanced with non-sticky ip (no hash).  For nginx you can use the following configuration file.
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location /{
+			proxy_pass http://cas;
+        }
+    }
+	
+	upstream cas {
+        server localhost:8080;
+        server localhost:7979;
+   }
+
+}
+
 ```
 
 ## Spring Boot
@@ -87,22 +119,19 @@ build.cmd help
 
 Deploy resultant `target/cas.war`  to a servlet container of choice.
 
+## References
 
 java -jar -Dcas.standalone.config=D:\cas\config cas.war
 java -jar -Dcas.standalone.config=D:\cas5_1\cas-overlay-template\etc\cas\config cas.war
-şablon ==> https://github.com/apereo/cas-overlay-template
+overlay template ==> https://github.com/apereo/cas-overlay-template
 
 https://github.com/casinthecloud/cas-overlay-demo
 https://github.com/apereo/cas/tree/master/webapp
-
-
 https://apereo.github.io/2017/02/02/cas51-authn-handlers/
-
 https://wiki.jasig.org/display/CASUM/Technical+Overview
-
 https://wiki.jasig.org/display/CAS/How+To+Write+an+AuthenticationHandler
-
 https://groups.google.com/forum/#!topic/jasig-cas-user/ddCmLLTxeGU
-
 https://github.com/apereo/cas/blob/v5.0.0/support/cas-server-support-authy/src/main/java/org/apereo/cas/adaptors/authy/config/AuthyConfiguration.java
 https://github.com/apereo/cas/blob/4293255c6db71666a1256cf7e4c515df77e91265/core/cas-server-core/src/test/java/org/apereo/cas/config/CasMultifactorTestAuthenticationEventExecutionPlanConfiguration.java
+https://apereo.github.io/cas/5.0.x/installation/Configuration-Properties.html
+https://apereo.github.io/cas/5.0.x/installation/Configuring-SSO-Session-Cookie.html
