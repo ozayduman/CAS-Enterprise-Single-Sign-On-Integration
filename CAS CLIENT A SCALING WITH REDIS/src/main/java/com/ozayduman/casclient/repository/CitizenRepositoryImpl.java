@@ -18,11 +18,11 @@ import java.util.Map;
 public class CitizenRepositoryImpl implements CitizenRepository {
     private static final String KEY = "Citizen";
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
     private HashOperations hashOps;
 
     @Autowired
-    public CitizenRepositoryImpl(RedisTemplate<String, Object> redisTemplate) {
+    public CitizenRepositoryImpl(RedisTemplate<Object, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
